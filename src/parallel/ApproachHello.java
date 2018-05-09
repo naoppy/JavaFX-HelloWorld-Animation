@@ -1,3 +1,5 @@
+package parallel;
+
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -10,7 +12,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class FadeHello extends Application {
+public class ApproachHello extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -22,28 +24,25 @@ public class FadeHello extends Application {
         double textWidth = text.getLayoutBounds().getWidth();
         double textHeight = text.getLayoutBounds().getHeight();
 
-        //アニメーション
-        FadeTransition transition = new FadeTransition(Duration.seconds(4), text);
-        transition.setFromValue(0.7);
+        //Fade
+        FadeTransition transition = new FadeTransition(Duration.seconds(4));
+        transition.setFromValue(0.5);
         transition.setToValue(1);
-        transition.setAutoReverse(true);
-        transition.setCycleCount(Animation.INDEFINITE);
-
-        ScaleTransition scale = new ScaleTransition(Duration.seconds(4), text);
+        //Scale
+        ScaleTransition scale = new ScaleTransition(Duration.seconds(4));
         scale.setFromX(1);
         scale.setFromY(1);
         scale.setToX(4);
         scale.setToY(4);
-        scale.setAutoReverse(true);
-        scale.setCycleCount(Animation.INDEFINITE);
-        scale.play();
-
-        RotateTransition rotate = new RotateTransition(Duration.seconds(4),text);
+        //Rotate
+        RotateTransition rotate = new RotateTransition(Duration.seconds(4));
         rotate.setToAngle(240);
-        rotate.setAutoReverse(true);
-        rotate.setCycleCount(Animation.INDEFINITE);
-        rotate.setInterpolator(Interpolator.LINEAR);
-        rotate.play();
+        //Sum
+        ParallelTransition parallelTransition = new ParallelTransition(text, transition, scale, rotate);
+        parallelTransition.setCycleCount(Animation.INDEFINITE);
+        parallelTransition.setInterpolator(Interpolator.LINEAR);
+        parallelTransition.setAutoReverse(true);
+        parallelTransition.play();
 
         //レンダリング
         Group group = new Group(text);
@@ -51,10 +50,8 @@ public class FadeHello extends Application {
         group.setLayoutX(400 - textWidth / 2);
         Scene scene = new Scene(group, 800, 600); // (8)
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Nazo Hello Java");
+        primaryStage.setTitle("Approach Hello Java");
         primaryStage.show();
-
-        transition.play();
     }
 
 }

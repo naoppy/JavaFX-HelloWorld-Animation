@@ -20,6 +20,7 @@ public class LeftRightText extends Application {
 
         //テキストの設定
         String text = "Java is God.";
+
         Text layoutSample = new Text("H");
         layoutSample.setFont(Font.font("Serif", FontWeight.SEMI_BOLD, 40));
         double sampleHeight = layoutSample.getLayoutBounds().getHeight();

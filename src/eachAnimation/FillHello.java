@@ -1,3 +1,5 @@
+package eachAnimation;
+
 import javafx.animation.Animation;
 import javafx.animation.FillTransition;
 import javafx.application.Application;

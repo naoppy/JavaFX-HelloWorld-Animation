@@ -1,6 +1,7 @@
+package eachAnimation;
+
 import javafx.animation.Animation;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ScaleHello extends Application {
+public class FadeHello extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -24,21 +25,19 @@ public class ScaleHello extends Application {
         double textHeight = text.getLayoutBounds().getHeight();
 
         //アニメーション
-        ScaleTransition transition = new ScaleTransition(Duration.seconds(4), text);
-        transition.setFromX(0.4);
-        transition.setFromY(0.8);
-        transition.setToX(2.2);
-        transition.setToY(1.7);
+        javafx.animation.FadeTransition transition = new javafx.animation.FadeTransition(Duration.seconds(4), text);
+        transition.setFromValue(0);
+        transition.setToValue(1);
         transition.setAutoReverse(true);
         transition.setCycleCount(Animation.INDEFINITE);
 
         //レンダリング
         Group group = new Group(text);
         group.setLayoutY(300);
-        group.setLayoutX(400-textWidth/2);
+        group.setLayoutX(400 - textWidth / 2);
         Scene scene = new Scene(group, 800, 600); // (8)
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Scale Hello Java");
+        primaryStage.setTitle("Fade Hello Java");
         primaryStage.show();
 
         transition.play();
